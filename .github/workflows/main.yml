@@ -1,0 +1,16 @@
+name: Keep Supabase Alive
+on:
+  schedule:
+    - cron: '0 0 */5 * *'  # Runs every 5 days (adjust as needed)
+  workflow_dispatch:  # Lets you manually trigger it
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send request to Supabase
+        run: |
+          curl -X POST 'https://YOUR_PROJECT_REF.supabase.co/rest/v1/rpc/ping' \
+          -H "apikey: YOUR_SUPABASE_ANON_KEY" \
+          -H "Content-Type: application/json" \
+          --data '{}'
